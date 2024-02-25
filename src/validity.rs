@@ -72,4 +72,22 @@ mod tests {
 
         assert_eq!(result, false)
     }
+
+    #[test]
+    fn given_far_diagonally_adjacent_queens_should_return_invalid() {
+        let  board = vec![Some(0), Some(0), Some(2), None];
+
+        let result= is_valid_board(board);
+
+        assert_eq!(result, false)
+    }
+
+    #[test]
+    fn given_reverse_diagonally_adjacent_queens_should_return_invalid() {
+        let  board = vec![Some(2), Some(2), Some(0), None];
+
+        let result= is_valid_board(board);
+
+        assert_eq!(result, false)
+    }
 }
