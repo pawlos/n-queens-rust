@@ -1,5 +1,17 @@
 fn is_valid_board(board: Vec<Option<usize>>) -> bool {
-    true
+    let mut result = true;
+
+    let n = board.len();
+
+    let newest_queen_position = board[n - 1];
+    for y in 1..n {
+        if board[y] == newest_queen_position {
+            result = false;
+            break;
+        }
+    }
+
+    result
 }
 
 #[cfg(test)]
@@ -13,5 +25,14 @@ mod tests {
         let result = is_valid_board(board);
 
         assert_eq!(result, true);
+    }
+
+    #[test]
+    fn given_adjacent_queens_should_return_invalid() {
+        let board = vec![Some(1), Some(3), Some(0), Some(0)];
+
+        let result = is_valid_board(board);
+
+        assert_eq!(result, false)
     }
 }
