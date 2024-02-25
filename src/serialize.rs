@@ -1,4 +1,4 @@
-pub fn serialize(board: &Vec<usize>) -> Vec<String> {
+pub fn serialize_board(board: &Vec<usize>) -> Vec<String> {
     let mut result = vec![];
     for y in 0..board.len() {
         let mut row = String::new();
@@ -27,7 +27,7 @@ mod tests {
     fn one_size_board() {
         let board = vec![0];
 
-        let result = serialize(&board);
+        let result = serialize_board(&board);
 
         assert_eq!(result, vec!["Q"])
     }
@@ -36,7 +36,7 @@ mod tests {
     fn four_size_board() {
         let board = vec![1,3,0,2];
 
-        let result = serialize(&board);
+        let result = serialize_board(&board);
 
         assert_eq!(result, vec!["..Q.",
                                 "Q...",
