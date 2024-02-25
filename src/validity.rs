@@ -5,7 +5,7 @@ fn is_valid_board(board: Vec<Option<usize>>) -> bool {
         .count();
 
     let newest_queen_position = board[number_complete_columns - 1].unwrap();
-    for x in 1..number_complete_columns {
+    for x in 0..number_complete_columns-1 {
         if board[x].unwrap() == newest_queen_position {
             result = false;
             break;
@@ -29,7 +29,7 @@ mod tests {
     }
 
     #[test]
-    fn given_adjacent_queens_should_return_invalid() {
+    fn given_horizontally_adjacent_queens_should_return_invalid() {
         let board = vec![Some(1), Some(3), Some(0), Some(0)];
 
         let result = is_valid_board(board);
@@ -38,8 +38,27 @@ mod tests {
     }
 
     #[test]
-    fn given_far_adjacent_queens_on_incomplete_board_should_return_invalid() {
+    fn given_far_horizontally_adjacent_queens_on_incomplete_board_should_return_invalid() {
         let board = vec![Some(1), Some(3), Some(1), None];
+
+        let result = is_valid_board(board);
+
+        assert_eq!(result, false)
+    }
+
+    #[test]
+    fn given_complete_valid_board_is_should_return_valid() {
+        let board = vec![Some(1), Some(3), Some(0), Some(2)];
+
+        let result = is_valid_board(board);
+
+        assert_eq!(result, true)
+    }
+
+    #[test]
+    #[ignore]
+    fn given_diagonally_adjacent_queens_should_return_invalid() {
+        let board = vec![Some(0), Some(1), None, None];
 
         let result = is_valid_board(board);
 
