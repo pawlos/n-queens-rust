@@ -24,18 +24,25 @@ pub fn n_queens(n: usize) -> Vec<Vec<String>> {
         let number_of_complete_columns = board.iter()
             .filter(|column| column.is_some())
             .count();
-        //generate 4 new boards
-        for row in 0..n {
-            let mut new_board = board.clone();
-            new_board[number_of_complete_columns-1] = Some(row);
+        let index_of_latest_queen = number_of_complete_columns - 1;
 
-            if is_valid_board(&new_board) {
-                if number_of_complete_columns == n {
-                    results.push(new_board);
-                } else {
-                    frontier.push(new_board);
+        if n != 1 {
+
+            //generate 4 new boards
+            for row in 0..n {
+                let mut new_board = board.clone();
+                new_board[index_of_latest_queen + 1] = Some(row);
+
+                if is_valid_board(&new_board) {
+                    if number_of_complete_columns + 1 == n {
+                        results.push(new_board);
+                    } else {
+                        frontier.push(new_board);
+                    }
                 }
             }
+        } else {
+            results.push(board);
         }
 
         // for each new board
