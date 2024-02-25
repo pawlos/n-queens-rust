@@ -1,3 +1,5 @@
+mod validity;
+
 use std::ops::BitOrAssign;
 
 pub fn n_queens(n: usize) -> Vec<Vec<String>> {
@@ -13,3 +15,4 @@ pub fn n_queens(n: usize) -> Vec<Vec<String>> {
     //serializer
     vec![vec![String::from("Q")]]
 }
+
