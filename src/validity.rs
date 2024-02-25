@@ -4,9 +4,18 @@ fn is_valid_board(board: Vec<Option<usize>>) -> bool {
     let number_complete_columns = board.iter().filter(|column| column.is_some())
         .count();
 
-    let newest_queen_position = board[number_complete_columns - 1].unwrap();
-    for x in 0..number_complete_columns-1 {
-        if board[x].unwrap() == newest_queen_position {
+    let newest_queen_position_x = number_complete_columns - 1;
+    let newest_queen_position_y = board[number_complete_columns - 1].unwrap();
+    for x in 0..newest_queen_position_x {
+        let y = board[x].unwrap();
+        if y == newest_queen_position_y {
+            result = false;
+            break;
+        }
+        let x_diff = newest_queen_position_x.abs_diff(x);
+        let y_diff = newest_queen_position_y.abs_diff(y);
+
+        if x_diff == y_diff {
             result = false;
             break;
         }
@@ -56,7 +65,6 @@ mod tests {
     }
 
     #[test]
-    #[ignore]
     fn given_diagonally_adjacent_queens_should_return_invalid() {
         let board = vec![Some(0), Some(1), None, None];
 
